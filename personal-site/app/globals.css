@@ -1,0 +1,48 @@
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes hideText {
+  0% {
+    content: "Abdulgani Muhammedsani";
+  }
+  20% {
+    content: "Abdulgani Muhammedsani";
+  }
+  40% {
+    content: "Abdulgan";
+  }
+  60% {
+    content: "Abdul";
+  }
+  80% {
+    content: "Abdul";
+  }
+  100% {
+    content: "Abdul";
+  }
+}
+
+@keyframes revealText {
+  0% {
+    content: "Abdul";
+  }
+  20% {
+    content: "Abdul";
+  }
+  40% {
+    content: "Abdulgan";
+  }
+  60% {
+    content: "Abdulgani";
+  }
+  80% {
+    content: "Abdulgani Muhammed";
+  }
+  100% {
+    content: "Abdulgani Muhammedsani";
+  }
+}
