@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function Home() {
+export default function Projects() {
   const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment, data science, \nand machine learning.";
   const [text, setText] = React.useState("");
   const [darkMode, setDarkMode] = React.useState(true);
@@ -29,9 +29,11 @@ export default function Home() {
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const goBackHome = () => {
     router.push('/');
   };
+  
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -153,7 +155,7 @@ export default function Home() {
               </IconButton>
             </Box>
             <Stack direction='row' spacing={2} color={"text.primary"} sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button onClick={goBackHome} style={{ fontFamily: 'monospace' }} color="inherit">About Me</Button>
+              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={goBackHome}>About Me</Button>
               <Button
                 style={{ fontFamily: "monospace" }}
                 color="inherit"
@@ -213,49 +215,6 @@ export default function Home() {
             </ListItem>
           </List>
         </Drawer>
-
-        <Box sx={{
-          flexGrow: 1,
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          justifyContent: 'center',
-          alignItems: 'center',
-          mt: 15,
-          ml: { xs: 2, md: 20 },
-          mr: { xs: 2, md: 2 },
-          maxWidth: '100%',
-        }}>
-          <Box sx={{
-            width: { xs: 200, md: 405 },
-            height: { xs: 'auto', md: 385 },
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <Card sx={{ width: '100%', height: '100%', borderRadius: '30%', boxShadow: 3, overflow: 'hidden' }}>
-              <CardMedia
-                component="img"
-                image="/images/abdulgani_muhammedsani_picture.png"
-                alt="Abdulgani's Picture"
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '30%',
-                  filter: 'brightness(90%)',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                    transition: 'transform 0.3s ease-in-out',
-                  }
-                }}
-              />
-            </Card>
-          </Box>
-          <Box sx={{ ml: { xs: 0, md: 10 }, mt: { xs: 4, md: 0 }, flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}>
-            <Typography fontSize={{ xs: 20, md: 30 }} style={{ fontFamily: 'monospace', whiteSpace: 'pre-line' }} variant="h5" component="p" gutterBottom>
-              {text}
-            </Typography>
-          </Box>
-        </Box>
         <Box
           sx={{
             py: 2,
