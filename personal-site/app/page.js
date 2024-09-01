@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 export default function Home() {
   const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
   const [text, setText] = React.useState("");
-  const [darkMode, setDarkMode] = React.useState(true);
+  const [darkMode, setDarkMode] = React.useState(false);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
@@ -178,7 +178,7 @@ export default function Home() {
                   Experiences
                 </MenuItem>
               </Menu>
-              <Button style={{ fontFamily: 'monospace' }} color="inherit">Education</Button>
+              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={() => handleMenuItemClick("/education")}>Education</Button>
               <IconButton color="inherit" onClick={toggleDarkMode}>
                 {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>

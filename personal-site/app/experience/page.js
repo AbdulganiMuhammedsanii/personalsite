@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import * as React from 'react';
-import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Grid } from '@mui/material';
+import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Grid , Menu, MenuItem} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -13,18 +13,32 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
 
 export default function Experiences() {
-  const [darkMode, setDarkMode] = React.useState(true);
+  const [darkMode, setDarkMode] = React.useState(false);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
   const router = useRouter();
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handleMenuItemClick = (path) => {
+    router.push(path);
+    handleMenuClose();
   };
 
   const toggleDarkMode = () => {
@@ -135,9 +149,33 @@ export default function Experiences() {
             >
               {displayedName}
             </Typography>
-            <Stack direction='row' spacing={2} color={"text.primary"}>
-              <Button onClick={goBackHome} style={{ fontFamily: 'monospace' }} color="inherit">About Me</Button>
-              <Button style={{ fontFamily: 'monospace' }} color="inherit">Education</Button>
+            <Stack direction='row' spacing={2} color={"text.primary"} sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={goBackHome}>About Me</Button>
+              <Button
+                style={{ fontFamily: "monospace" }}
+                color="inherit"
+                onClick={handleMenuClick}
+              >
+                Work
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                sx={{
+                  '& .MuiPaper-root': {
+                    backgroundColor: 'primary.main',
+                  },
+                }}
+              >
+                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/projects")}>
+                  Projects
+                </MenuItem>
+                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/experience")}>
+                  Experiences
+                </MenuItem>
+              </Menu>
+              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={() => handleMenuItemClick("/education")}>Education</Button>
               <IconButton color="inherit" onClick={toggleDarkMode}>
                 {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
@@ -147,7 +185,7 @@ export default function Experiences() {
 
         <Container sx={{ mt: 10, mb: 5 }}>
           <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
-            My Experiences
+            my experiences
           </Typography>
           <Grid container spacing={4} direction="column">
             {experiences.map((experience, index) => (
