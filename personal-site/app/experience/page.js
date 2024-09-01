@@ -52,24 +52,24 @@ export default function Experiences() {
 
   const experiences = [
     {
-      image: "/images/cornell_webdev.webp",
-      role: "Cornell Webdev Project Team Member",
-      description: "Analyzed large datasets using Python and SQL, created dashboards with Tableau, and provided insights that improved business decision-making processes.",
-    },
-    {
       image: "/images/headstarter.png",
       role: "SWE Fellow at Headstarter AI",
-      description: "Analyzed large datasets using Python and SQL, created dashboards with Tableau, and provided insights that improved business decision-making processes.",
+      description: "Built 5+ AI apps and APIs using NextJS, OpenAI, Pinecone, StripeAPI \n  from design to deployment leading 3 engineering fellows using MVC design patterns. \n Coached by Amazon, Bloomberg, and Capital One engineers on Agile, CI/CD, Git and microservice patterns",
+    },
+    {
+      image: "/images/cornell_webdev.webp",
+      role: "Cornell Webdev Project Team Member",
+      description: "Contributed to Scheduler plus, a chrome extension that serves to provide additional information for students looking to create their schedule. Utilized React, JavaScript, and HTML/CSS to develop the front-end of the extension. Collaborated with a team of 3 developers to implement features and deployment.",
     },
     {
       image: "/images/cornell_logo.png",
       role: "CS1110 Course Assistant",
-      description: "Developed and maintained web applications using React, Node.js, and MongoDB. Worked closely with the UI/UX team to create responsive and user-friendly interfaces.",
+      description: "Assisted in lab sections by guiding 30+ students through technical coding problems. Contributed to bi-weekly grading sessions of 400+ coding assignments, and provided comprehensive feedback.",
     },
     {
       image: "/images/google_cssi.jpg",
       role: "Google CSSI Program Participant",
-      description: "Analyzed large datasets using Python and SQL, created dashboards with Tableau, and provided insights that improved business decision-making processes.",
+      description: "Participated in a 4-week intensive computer science summer program for high-achieving students. Configured 14 individual coding projects in JavaScript by using concepts such as variables, data types, and functions. Delivered a collaborative final project presentation that included a live demonstration to Google employees and community leaders.",
     }
     // Add more experiences here
   ];

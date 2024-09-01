@@ -15,7 +15,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 export default function Home() {
-  const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment, data science, \nand machine learning.";
+  const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
   const [text, setText] = React.useState("");
   const [darkMode, setDarkMode] = React.useState(true);
   const fullName = 'Abdulgani Muhammedsani';

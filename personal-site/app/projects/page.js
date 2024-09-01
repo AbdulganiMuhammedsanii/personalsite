@@ -1,7 +1,25 @@
 "use client";
 import Image from "next/image";
 import * as React from 'react';
-import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Container,
+  IconButton,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  AppBar,
+  Toolbar,
+  Typography,
+  Stack,
+  Button,
+  Box,
+  CssBaseline,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -15,13 +33,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 export default function Projects() {
-  const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment, data science, \nand machine learning.";
-  const [text, setText] = React.useState("");
-  const [darkMode, setDarkMode] = React.useState(true);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false); // State for the mobile drawer
   const router = useRouter();
@@ -70,19 +86,6 @@ export default function Projects() {
       return () => clearTimeout(timeout);
     }
   }, [isHovered, displayedName]);
-
-  React.useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < fulltext.length - 1) {
-        setText((prevText) => prevText + fulltext[i]);
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 25);
-    return () => clearInterval(interval);
-  }, [fulltext]);
 
   const darkTheme = createTheme({
     palette: {
@@ -215,6 +218,36 @@ export default function Projects() {
             </ListItem>
           </List>
         </Drawer>
+
+        {/* Project Panel */}
+        <Container maxWidth="md" sx={{ mt: 15 }}>
+          <Card sx={{ backgroundColor: "background.paper", boxShadow: 3}}>
+            <CardMedia
+              component="img"
+              height="500"
+              image="/images/csadvisor.png" // Replace with the actual image URL
+              alt="CSAdvisor Project"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                CSAdvisor
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                CSAdvisor is a web application developed for Cornell University students to assist in course planning and advising. 
+                The platform offers detailed insights into courses, professors, and student feedback, helping students make informed decisions about their academic paths.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" color="secondary" href="https://cs.cornelladvisor.com" target="_blank">
+                Visit Site
+              </Button>
+              <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/Customer_support" target="_blank">
+                View Code
+              </Button>
+            </CardActions>
+          </Card>
+        </Container>
+
         <Box
           sx={{
             py: 2,
