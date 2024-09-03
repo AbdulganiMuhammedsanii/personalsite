@@ -15,46 +15,61 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { AuthContext } from '../context/AuthContext';
 
-
-
 export default function Home() {
   const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
   const [text, setText] = React.useState("");
-  const {darkMode, setDarkMode} = React.useContext(AuthContext);
+  const [isTextGenerating, setIsTextGenerating] = React.useState(true); // Track if text is generating
+  const { darkMode, setDarkMode } = React.useContext(AuthContext);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [drawerOpen, setDrawerOpen] = React.useState(false); // State for the mobile drawer
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const router = useRouter();
-  
+
+  const textIntervalRef = React.useRef(null);
+  const textGeneratedRef = React.useRef(false);
 
   const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (!isTextGenerating) {
+      setAnchorEl(event.currentTarget);
+    }
   };
+
   const goBackHome = () => {
-    router.push('/');
+    if (!isTextGenerating) {
+      router.push('/');
+    }
   };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   const handleMenuItemClick = (path) => {
-    router.push(path);
-    handleMenuClose();
+    if (!isTextGenerating) {
+      router.push(path);
+      handleMenuClose();
+    }
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    if (!isTextGenerating) {
+      setIsHovered(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    if (!isTextGenerating) {
+      setIsHovered(false);
+    }
   };
 
   const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
+    if (!isTextGenerating) {
+      setDrawerOpen(open);
+    }
   };
 
   React.useEffect(() => {
@@ -74,17 +89,22 @@ export default function Home() {
   }, [isHovered, displayedName]);
 
   React.useEffect(() => {
+    if (textGeneratedRef.current) return;
+
     let i = 0;
-    const interval = setInterval(() => {
+    textIntervalRef.current = setInterval(() => {
       if (i < fulltext.length - 1) {
         setText((prevText) => prevText + fulltext[i]);
         i++;
       } else {
-        clearInterval(interval);
+        clearInterval(textIntervalRef.current);
+        textGeneratedRef.current = true;
+        setIsTextGenerating(false); // Text generation complete, re-enable buttons
       }
     }, 25);
-    return () => clearInterval(interval);
-  }, [fulltext]);
+
+    return () => clearInterval(textIntervalRef.current);
+  }, []); 
 
   const darkTheme = createTheme({
     palette: {
@@ -123,7 +143,9 @@ export default function Home() {
   });
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    if (!isTextGenerating) {
+      setDarkMode(!darkMode);
+    }
   };
 
   return (
@@ -152,16 +174,17 @@ export default function Home() {
               {displayedName}
             </Typography>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-              <IconButton color="inherit" onClick={toggleDrawer(true)}>
+              <IconButton color="inherit" onClick={toggleDrawer(true)} disabled={isTextGenerating}>
                 <MenuIcon />
               </IconButton>
             </Box>
             <Stack direction='row' spacing={2} color={"text.primary"} sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button onClick={goBackHome} style={{ fontFamily: 'monospace' }} color="inherit">About Me</Button>
+              <Button onClick={goBackHome} style={{ fontFamily: 'monospace' }} color="inherit" disabled={isTextGenerating}>About Me</Button>
               <Button
                 style={{ fontFamily: "monospace" }}
                 color="inherit"
                 onClick={handleMenuClick}
+                disabled={isTextGenerating}
               >
                 Work
               </Button>
@@ -175,15 +198,15 @@ export default function Home() {
                   },
                 }}
               >
-                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/projects")}>
+                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/projects")} disabled={isTextGenerating}>
                   Projects
                 </MenuItem>
-                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/experience")}>
+                <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/experience")} disabled={isTextGenerating}>
                   Experiences
                 </MenuItem>
               </Menu>
-              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={() => handleMenuItemClick("/education")}>Education</Button>
-              <IconButton color="inherit" onClick={toggleDarkMode}>
+              <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={() => handleMenuItemClick("/education")} disabled={isTextGenerating}>Education</Button>
+              <IconButton color="inherit" onClick={toggleDarkMode} disabled={isTextGenerating}>
                 {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
             </Stack>
@@ -203,16 +226,16 @@ export default function Home() {
           }}
         >
           <List>
-            <ListItem button onClick={() => handleMenuItemClick("/")}>
+            <ListItem button onClick={() => handleMenuItemClick("/")} disabled={isTextGenerating}>
               <ListItemText primary="About Me" />
             </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/projects")}>
+            <ListItem button onClick={() => handleMenuItemClick("/projects")} disabled={isTextGenerating}>
               <ListItemText primary="Projects" />
             </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/experience")}>
+            <ListItem button onClick={() => handleMenuItemClick("/experience")} disabled={isTextGenerating}>
               <ListItemText primary="Experiences" />
             </ListItem>
-            <ListItem button onClick={toggleDarkMode}>
+            <ListItem button onClick={toggleDarkMode} disabled={isTextGenerating}>
               <ListItemText primary="Toggle Dark Mode" />
             </ListItem>
           </List>
@@ -276,6 +299,7 @@ export default function Home() {
                 target="_blank"
                 color="inherit"
                 aria-label="GitHub"
+                disabled={isTextGenerating}
               >
                 <GitHubIcon />
               </IconButton>
@@ -285,6 +309,7 @@ export default function Home() {
                 target="_blank"
                 color="inherit"
                 aria-label="LinkedIn"
+                disabled={isTextGenerating}
               >
                 <LinkedInIcon />
               </IconButton>
@@ -293,6 +318,7 @@ export default function Home() {
                 href="mailto:abdulgani.muhammedsani@gmail.com"
                 color="inherit"
                 aria-label="Email"
+                disabled={isTextGenerating}
               >
                 <EmailIcon />
               </IconButton>
