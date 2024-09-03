@@ -19,6 +19,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Grid,
 } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
@@ -225,10 +226,10 @@ export default function Projects() {
         <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
             my projects
           </Typography>
-          <Card sx={{ backgroundColor: "background.paper", boxShadow: 3}}>
+          <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb : 4}}>
             <CardMedia
               component="img"
-              height="500"
+              height="470"
               image="/images/csadvisor.png" // Replace with the actual image URL
               alt="CSAdvisor Project"
             />
@@ -250,7 +251,172 @@ export default function Projects() {
               </Button>
             </CardActions>
           </Card>
+          <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4}}>
+            <CardMedia
+              component="img"
+              height="430"
+              image="/images/project2.png" // Replace with the actual image URL
+              alt="Recovery AI project"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                Recovery AI
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                Recovery AI is a web application developed for anyone who needs damaged an blurred images to be refined. 
+                The platform offers key services to streamline this process into service packages, helping users make informed decisions about their image refinement.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" color="secondary" href="https://cs.cornelladvisor.com" target="_blank">
+                Visit Site
+              </Button>
+              <Button size="small" color="secondary" href="https://github.com/mehdialam98/enhanced_img_AI" target="_blank">
+                View Code
+              </Button>
+            </CardActions>
+          </Card>
+        <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4}}>
+            <CardMedia
+              component="img"
+              height="430"
+              image="/images/project3.png" // Replace with the actual image URL
+              alt="CornellMedian"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                CornellMedian
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                CornellMedian is a web application developed for Cornell Students who needs additional course information typically not found on the University website. 
+                This includes median grades, class sizes, etc.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" color="secondary" href="https://cornellmedian.vercel.app/m" target="_blank">
+                Visit Site
+              </Button>
+              <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/CornellMedian" target="_blank">
+                View Code
+              </Button>
+            </CardActions>
+          </Card>
         </Container>
+        <Container
+  maxWidth="md"
+  sx={{
+    mt: 5,
+    mb: 2,
+    py: 8,
+    px: 4,
+    bgcolor: darkMode ? 'background.paper' : '#f5f5f5', // Background color based on theme
+    borderRadius: 2, // Rounded corners
+    boxShadow: 3, // Subtle shadow for depth
+  }}
+>
+  <Typography
+    variant="h4"
+    gutterBottom
+    style={{ fontFamily: 'monospace', textAlign: 'center', color: darkMode ? '#ffffff' : '#333333' }}
+  >
+    Tools & Software
+  </Typography>
+
+  <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#61DAFB' : '#333333', // React color in dark mode, default in light mode
+          }}
+        >
+          React
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#61DAFB' : '#333333', // Next.js color in dark mode, default in light mode
+          }}
+        >
+          Next.js
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#339933' : '#333333', // Node.js color in dark mode, default in light mode
+          }}
+        >
+          Node.js
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#47A248' : '#333333', // MongoDB color in dark mode, default in light mode
+          }}
+        >
+          PostgreSQL
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#FFCA28' : '#333333', // Firebase color in dark mode, default in light mode
+          }}
+        >
+          Firebase
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#F05032' : '#333333', // Git color in dark mode, default in light mode
+          }}
+        >
+          Git
+        </Typography>
+      </Box>
+    </Grid>
+    <Grid item xs={12} sm={6} md={3}>
+      <Box textAlign="center">
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: 'monospace',
+            color: darkMode ? '#007FFF' : '#333333', // Material-UI color in dark mode, default in light mode
+          }}
+        >
+          Material-UI
+        </Typography>
+      </Box>
+    </Grid>
+  </Grid>
+</Container>
+
 
         <Box
           sx={{

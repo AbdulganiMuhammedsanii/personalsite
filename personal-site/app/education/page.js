@@ -233,7 +233,7 @@ export default function Education() {
             gutterBottom
             style={{ fontFamily: "monospace", textAlign: "center" }}
           >
-            My CS and Stat Education
+            my cs and stat education
           </Typography>
           <Grid container spacing={4}>
             {semesters.map((semester, index) => (
