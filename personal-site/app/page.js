@@ -13,11 +13,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { AuthContext } from '../context/AuthContext';
+
+
 
 export default function Home() {
   const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
   const [text, setText] = React.useState("");
-  const [darkMode, setDarkMode] = React.useState(false);
+  const {darkMode, setDarkMode} = React.useContext(AuthContext);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
@@ -25,6 +28,7 @@ export default function Home() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false); // State for the mobile drawer
   const router = useRouter();
+  
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);

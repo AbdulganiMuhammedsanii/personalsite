@@ -24,9 +24,11 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import { useRouter } from "next/navigation";
+import { AuthContext } from '../../context/AuthContext';
+
 
 export default function Education() {
-  const [darkMode, setDarkMode] = useState(false);
+  const {darkMode, setDarkMode} = React.useContext(AuthContext);
   const [mounted, setMounted] = useState(false); // Track if the component is mounted
   const fullName = "Abdulgani Muhammedsani";
   const shortName = "Abdul";

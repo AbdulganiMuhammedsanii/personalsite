@@ -11,9 +11,10 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Experiences() {
-  const [darkMode, setDarkMode] = React.useState(false);
+  const {darkMode, setDarkMode} = React.useContext(AuthContext);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [anchorEl, setAnchorEl] = React.useState(null);

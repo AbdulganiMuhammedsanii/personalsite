@@ -32,13 +32,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Projects() {
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
-  const [darkMode, setDarkMode] = React.useState(false);
+  const {darkMode, setDarkMode} = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false); // State for the mobile drawer
   const router = useRouter();
