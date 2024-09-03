@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { AuthContext } from '../context/AuthContext';
 
 export default function Home() {
-  const fulltext = "hii, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
+  const fulltext = "hhi, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
   const [text, setText] = React.useState("");
   const [isTextGenerating, setIsTextGenerating] = React.useState(true); // Track if text is generating
   const { darkMode, setDarkMode } = React.useContext(AuthContext);
