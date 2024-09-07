@@ -269,10 +269,10 @@ export default function Projects() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" color="secondary" href="https://cs.cornelladvisor.com" target="_blank">
+              <Button size="small" color="secondary" href="https://recoveryai.pro" target="_blank">
                 Visit Site
               </Button>
-              <Button size="small" color="secondary" href="https://github.com/mehdialam98/enhanced_img_AI" target="_blank">
+              <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/enhanced_img_AI" target="_blank">
                 View Code
               </Button>
             </CardActions>
