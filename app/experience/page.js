@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import * as React from 'react';
-import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Grid , Menu, MenuItem} from '@mui/material';
+import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Grid, Menu, MenuItem } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Experiences() {
-  const {darkMode, setDarkMode} = React.useContext(AuthContext);
+  const { darkMode, setDarkMode } = React.useContext(AuthContext);
   const fullName = 'Abdulgani Muhammedsani';
   const shortName = 'Abdul';
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -66,6 +66,11 @@ export default function Experiences() {
   }, [isHovered, displayedName]);
 
   const experiences = [
+    {
+      image: "/images/logo.png",
+      role: "Contracted Developer @ Futures of Kashmir",
+      description: "Built a secure donation platform using Next.js and StripeAPI, receiving $6,000 in donations and $7,250 funding from the Social Innovation and Public Service Fund (SIPS).\n Integrated Stripe API for real-time payment processing and seamless bank account linkage.\n Designed a donor-friendly interface with Material-UI to enhance user engagement and simplify transactions."
+    },
     {
       image: "/images/headstarter.png",
       role: "SWE Fellow at Headstarter AI",
@@ -139,7 +144,7 @@ export default function Experiences() {
       >
         <AppBar position="fixed" color="primary">
           <Toolbar>
-          <Typography
+            <Typography
               color={"text.primary"}
               style={{ fontFamily: 'monospace', cursor: 'pointer' }}
               variant="h6"
