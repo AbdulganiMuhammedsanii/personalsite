@@ -239,7 +239,7 @@ export default function Projects() {
                 Futures of Kashmir
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                Futures of Kashmir is a dynamic and secure website developed for a Georgetown-founded non-profit organization dedicated to enhancing educational opportunities and promoting literacy among children in the Kashmir region. The website serves as a comprehensive platform to showcase the organization's&apos; initiatives, facilitate donations, and engage with supporters and the community.
+                Futures of Kashmir is a dynamic and secure website developed for a Georgetown-founded non-profit organization dedicated to enhancing educational opportunities and promoting literacy among children in the Kashmir region. The website serves as a comprehensive platform to showcase the organization&apos; s; initiatives, facilitate donations, and engage with supporters and the community.
               </Typography>
             </CardContent>
             <CardActions>
