@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import * as React from 'react';
 import { Container, IconButton, Card, CardMedia, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -25,7 +24,7 @@ export default function Home() {
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [anchorEl1, setAnchorEl1] = React.useState(null)
   const router = useRouter();
 
   const textIntervalRef = React.useRef(null);
@@ -36,6 +35,9 @@ export default function Home() {
       setAnchorEl(event.currentTarget);
     }
   };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const goBackHome = () => {
     if (!isTextGenerating) {
@@ -43,9 +45,16 @@ export default function Home() {
     }
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleMenuDrawerClick = (event) => {
+    if (!isTextGenerating) {
+      setAnchorEl1(event.currentTarget);
+    }
   };
+
+  const handleMenuDrawerClose = () => {
+    setAnchorEl1(null);
+  };
+
 
   const handleMenuItemClick = (path) => {
     if (!isTextGenerating) {
@@ -66,11 +75,6 @@ export default function Home() {
     }
   };
 
-  const toggleDrawer = (open) => () => {
-    if (!isTextGenerating) {
-      setDrawerOpen(open);
-    }
-  };
 
   React.useEffect(() => {
     if (isHovered && displayedName.length > shortName.length) {
@@ -104,7 +108,7 @@ export default function Home() {
     }, 25);
 
     return () => clearInterval(textIntervalRef.current);
-  }, []); 
+  }, []);
 
   const darkTheme = createTheme({
     palette: {
@@ -174,7 +178,7 @@ export default function Home() {
               {displayedName}
             </Typography>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-              <IconButton color="inherit" onClick={toggleDrawer(true)} disabled={isTextGenerating}>
+              <IconButton color="inherit" onClick={handleMenuDrawerClick} disabled={isTextGenerating}>
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -204,6 +208,7 @@ export default function Home() {
                 <MenuItem sx={{ fontFamily: 'monospace' }} onClick={() => handleMenuItemClick("/experience")} disabled={isTextGenerating}>
                   Experiences
                 </MenuItem>
+
               </Menu>
               <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={() => handleMenuItemClick("/education")} disabled={isTextGenerating}>Education</Button>
               <IconButton color="inherit" onClick={toggleDarkMode} disabled={isTextGenerating}>
@@ -214,32 +219,29 @@ export default function Home() {
         </AppBar>
 
         {/* Drawer for mobile */}
-        <Drawer
-          anchor="left"
-          open={drawerOpen}
-          onClose={toggleDrawer(false)}
+        <Menu
+          anchorEl={anchorEl1}
+          open={Boolean(anchorEl1)}
+          onClose={handleMenuDrawerClose}
           sx={{
             '& .MuiPaper-root': {
               backgroundColor: 'primary.main',
-              color: 'white',
             },
           }}
         >
-          <List>
-            <ListItem button onClick={() => handleMenuItemClick("/")} disabled={isTextGenerating}>
-              <ListItemText primary="About Me" />
-            </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/projects")} disabled={isTextGenerating}>
-              <ListItemText primary="Projects" />
-            </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/experience")} disabled={isTextGenerating}>
-              <ListItemText primary="Experiences" />
-            </ListItem>
-            <ListItem button onClick={toggleDarkMode} disabled={isTextGenerating}>
-              <ListItemText primary="Toggle Dark Mode" />
-            </ListItem>
-          </List>
-        </Drawer>
+          <MenuItem button onClick={() => handleMenuItemClick("/projects")} disabled={isTextGenerating}>
+            Projects
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/experience")} disabled={isTextGenerating}>
+            Experiences
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/education")} disabled={isTextGenerating}>
+            Education
+          </MenuItem>
+          <MenuItem button onClick={toggleDarkMode} disabled={isTextGenerating}>
+            Toggle Dark Mode
+          </MenuItem>
+        </Menu>
 
         <Box sx={{
           flexGrow: 1,

@@ -15,12 +15,16 @@ import {
   Button,
   Box,
   CssBaseline,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   Grid,
 } from '@mui/material';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -41,11 +45,16 @@ export default function Projects() {
   const [isHovered, setIsHovered] = React.useState(false);
   const { darkMode, setDarkMode } = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [drawerOpen, setDrawerOpen] = React.useState(false); // State for the mobile drawer
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+
   const router = useRouter();
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuDrawerClick = (event) => {
+    setAnchorEl1(event.currentTarget);
   };
 
   const goBackHome = () => {
@@ -56,6 +65,10 @@ export default function Projects() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleMenuDrawerClose = () => {
+    setAnchorEl1(null);
+  }
 
   const handleMenuItemClick = (path) => {
     router.push(path);
@@ -70,9 +83,6 @@ export default function Projects() {
     setIsHovered(false);
   };
 
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
-  };
 
   React.useEffect(() => {
     if (isHovered && displayedName.length > shortName.length) {
@@ -156,7 +166,7 @@ export default function Projects() {
               {displayedName}
             </Typography>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-              <IconButton color="inherit" onClick={toggleDrawer(true)}>
+              <IconButton color="inherit" onClick={handleMenuDrawerClick}>
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -195,32 +205,29 @@ export default function Projects() {
         </AppBar>
 
         {/* Drawer for mobile */}
-        <Drawer
-          anchor="left"
-          open={drawerOpen}
-          onClose={toggleDrawer(false)}
+        <Menu
+          anchorEl={anchorEl1}
+          open={Boolean(anchorEl1)}
+          onClose={handleMenuDrawerClose}
           sx={{
             '& .MuiPaper-root': {
               backgroundColor: 'primary.main',
-              color: 'white',
             },
           }}
         >
-          <List>
-            <ListItem button onClick={() => handleMenuItemClick("/")}>
-              <ListItemText primary="About Me" />
-            </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/projects")}>
-              <ListItemText primary="Projects" />
-            </ListItem>
-            <ListItem button onClick={() => handleMenuItemClick("/experience")}>
-              <ListItemText primary="Experiences" />
-            </ListItem>
-            <ListItem button onClick={toggleDarkMode}>
-              <ListItemText primary="Toggle Dark Mode" />
-            </ListItem>
-          </List>
-        </Drawer>
+          <MenuItem button onClick={() => handleMenuItemClick("/")}>
+            About Me
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/experience")}>
+            Experiences
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/education")} >
+            Education
+          </MenuItem>
+          <MenuItem button onClick={toggleDarkMode} >
+            Toggle Dark Mode
+          </MenuItem>
+        </Menu>
 
         {/* Project Panel */}
         <Container maxWidth="md" sx={{ mt: 15 }}>
@@ -228,12 +235,47 @@ export default function Projects() {
             my projects
           </Typography>
           <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-            <CardMedia
-              component="img"
-              height="430"
-              image="/images/projectee4.png" // Replace with the actual image URL
-              alt="Futures of Kashmir"
-            />
+            <CardMedia> {/* Set a fixed height for CardMedia */}
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                autoplay={{ delay: 1500 }}
+                loop
+                speed={3000} // Increase the transition duration for smoother sliding
+                style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
+              >
+                <SwiperSlide>
+                  <Image
+                    src="/images/projec4.png"
+                    alt="Slide 1"
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                    objectFit="cover" // Ensure the image covers the slide area
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src="/images/team.png"
+                    alt="Slide 2"
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src="/images/instaa.png"
+                    layout="responsive"
+                    alt="Slide 3"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+                </SwiperSlide>
+              </Swiper>
+            </CardMedia>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
                 Futures of Kashmir
@@ -252,12 +294,46 @@ export default function Projects() {
             </CardActions>
           </Card>
           <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-            <CardMedia
-              component="img"
-              height="430"
-              image="/images/project2.png" // Replace with the actual image URL
-              alt="Recovery AI project"
-            />
+            <CardMedia> {/* Set a fixed height for CardMedia */}
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                autoplay={{ delay: 3500 }}
+                loop
+                speed={3000} // Increase the transition duration for smoother sliding
+                style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
+              >
+                <SwiperSlide>
+                  <Image
+                    src="/images/project2.png"
+                    alt="recoveryhome"
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src="/images/serviceinfo.png"
+                    alt="serviceinfo"
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image
+                    src="/images/rates.png"
+                    alt="rates"
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+                </SwiperSlide>
+              </Swiper>
+            </CardMedia>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
                 Recovery AI
@@ -277,12 +353,19 @@ export default function Projects() {
             </CardActions>
           </Card>
           <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-            <CardMedia
-              component="img"
-              height="470"
-              image="/images/csadvisor.png" // Replace with the actual image URL
-              alt="CSAdvisor Project"
-            />
+            <CardMedia>
+
+              <Image
+                layout="responsive"
+                width={850}
+                height={430}
+                src="/images/csadvisor.png" // Replace with the actual image URL
+                alt="CSAdvisor Project"
+                style={{ objectFit: "cover", width: "100%", height: "auto" }}
+              />
+
+
+            </CardMedia>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
                 CSAdvisor

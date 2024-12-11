@@ -16,6 +16,8 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { blue, green } from "@mui/material/colors";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -28,7 +30,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 export default function Education() {
-  const {darkMode, setDarkMode} = React.useContext(AuthContext);
+  const { darkMode, setDarkMode } = React.useContext(AuthContext);
   const [mounted, setMounted] = useState(false); // Track if the component is mounted
   const fullName = "Abdulgani Muhammedsani";
   const shortName = "Abdul";
@@ -36,6 +38,8 @@ export default function Education() {
   const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl1, setAnchorEl1] = React.useState(null)
+
 
 
   useEffect(() => {
@@ -45,6 +49,14 @@ export default function Education() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleMenuDrawerClose = () => {
+    setAnchorEl1(null);
+  };
+
+  const handleMenuDrawerClick = (event) => {
+    setAnchorEl1(event.currentTarget);
+  }
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -195,6 +207,11 @@ export default function Education() {
             >
               {displayedName}
             </Typography>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <IconButton color="inherit" onClick={handleMenuDrawerClick}>
+                <MenuIcon />
+              </IconButton>
+            </Box>
             <Stack direction='row' spacing={2} color={"text.primary"} sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button style={{ fontFamily: 'monospace' }} color="inherit" onClick={goBackHome}>About Me</Button>
               <Button
@@ -228,6 +245,30 @@ export default function Education() {
             </Stack>
           </Toolbar>
         </AppBar>
+        {/* Drawer for mobile */}
+        <Menu
+          anchorEl={anchorEl1}
+          open={Boolean(anchorEl1)}
+          onClose={handleMenuDrawerClose}
+          sx={{
+            '& .MuiPaper-root': {
+              backgroundColor: 'primary.main',
+            },
+          }}
+        >
+          <MenuItem button onClick={() => handleMenuItemClick("/")}>
+            About Me
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/projects")} >
+            Projects
+          </MenuItem>
+          <MenuItem button onClick={() => handleMenuItemClick("/experience")} >
+            Experiences
+          </MenuItem>
+          <MenuItem button onClick={toggleDarkMode} >
+            Toggle Dark Mode
+          </MenuItem>
+        </Menu>
 
         <Container sx={{ mt: 10, mb: 5 }}>
           <Typography
