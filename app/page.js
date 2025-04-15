@@ -276,15 +276,16 @@ export default function Home() {
               <Card sx={{ width: '100%', height: '100%', borderRadius: '30%', boxShadow: 3, overflow: 'hidden' }}>
                 <CardMedia
                   component="img"
-                  image="/images/abdulgani_muhammedsani_picture.png"
+                  image="/images/abdulganiheadshot.JPG"
                   alt="Abdulgani's Picture"
                   sx={{
-                    width: '100%',
+                    width: '110%', // Increase width to move the image to the right
                     height: '100%',
                     borderRadius: '30%',
                     filter: 'brightness(90%)',
+                    transform: 'translateX(-1%)', // Shift the image to the right
                     '&:hover': {
-                      transform: 'scale(1.05)',
+                      transform: 'translateX(-1%) scale(1.05)', // Maintain the right shift on hover
                       transition: 'transform 0.3s ease-in-out',
                     }
                   }}
@@ -353,6 +354,284 @@ export default function Home() {
             ))}
           </Grid>
         </Container>
+
+
+
+
+        {/* Project Panel */}
+        <Container maxWidth="md" sx={{ mt: 7 }}>
+          <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
+            my projects
+          </Typography>
+          {isSwiperReady && (
+            <>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+                <CardMedia> {/* Set a fixed height for CardMedia */}
+                  <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    autoplay={{ delay: 1500 }}
+                    loop
+                    speed={3000} // Increase the transition duration for smoother sliding
+                    style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
+                  >
+                    <SwiperSlide>
+                      <Image
+                        src="/images/projec4.png"
+                        alt="Slide 1"
+                        layout="responsive"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                        objectFit="cover" // Ensure the image covers the slide area
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Image
+                        src="/images/team.png"
+                        alt="Slide 2"
+                        layout="responsive"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Image
+                        src="/images/instaa.png"
+                        layout="responsive"
+                        alt="Slide 3"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                      />
+                    </SwiperSlide>
+                  </Swiper>
+                </CardMedia>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                    Futures of Kashmir
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                    Futures of Kashmir is a dynamic and secure website developed for a Georgetown-founded non-profit organization dedicated to enhancing educational opportunities and promoting literacy among children in the Kashmir region. The website serves as a comprehensive platform to showcase the organization&apos; s; initiatives, facilitate donations, and engage with supporters and the community.
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="secondary" href="https://futuresofkashmir.org/" target="_blank">
+                    Visit Site
+                  </Button>
+                  <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/kashmir" target="_blank">
+                    View Code
+                  </Button>
+                </CardActions>
+              </Card>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+                <CardMedia> {/* Set a fixed height for CardMedia */}
+                  <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    autoplay={{ delay: 3500 }}
+                    loop
+                    speed={3000} // Increase the transition duration for smoother sliding
+                    style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
+                  >
+                    <SwiperSlide>
+                      <Image
+                        src="/images/project2.png"
+                        alt="recoveryhome"
+                        layout="responsive"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Image
+                        src="/images/serviceinfo.png"
+                        alt="serviceinfo"
+                        layout="responsive"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Image
+                        src="/images/rates.png"
+                        alt="rates"
+                        layout="responsive"
+                        width={850}
+                        height={430}
+                        style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                      />
+                    </SwiperSlide>
+                  </Swiper>
+                </CardMedia>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                    Recovery AI
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                    Recovery AI is a web application developed for anyone who needs damaged an blurred images to be refined.
+                    The platform offers key services to streamline this process into service packages, helping users make informed decisions about their image refinement.
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="secondary" href="https://recoveryai.pro" target="_blank">
+                    Visit Site
+                  </Button>
+                  <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/enhanced_img_AI" target="_blank">
+                    View Code
+                  </Button>
+                </CardActions>
+              </Card>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+                <CardMedia>
+
+                  <Image
+                    layout="responsive"
+                    width={850}
+                    height={430}
+                    src="/images/csadvisor.png" // Replace with the actual image URL
+                    alt="CSAdvisor Project"
+                    style={{ objectFit: "cover", width: "100%", height: "auto" }}
+                  />
+
+                </CardMedia>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
+                    CSAdvisor
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
+                    CSAdvisor is a web application developed for Cornell University students to assist in course planning and advising.
+                    The platform offers detailed insights into courses, professors, and student feedback, helping students make informed decisions about their academic paths.
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="secondary" href="https://cs.cornelladvisor.com" target="_blank">
+                    Visit Site
+                  </Button>
+                  <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/Customer_support" target="_blank">
+                    View Code
+                  </Button>
+                </CardActions>
+              </Card>
+            </>
+          )}
+        </Container>
+        <Container
+          maxWidth="md"
+          sx={{
+            mt: 5,
+            mb: 2,
+            py: 8,
+            px: 4,
+            bgcolor: darkMode ? 'background.paper' : 'background.default', // Background color based on theme
+            borderRadius: 2, // Rounded corners
+            boxShadow: 3, // Subtle shadow for depth
+          }}
+        >
+          <Typography
+            variant="h4"
+            gutterBottom
+            style={{ fontFamily: 'monospace', textAlign: 'center', color: darkMode ? '#ffffff' : '#333333' }}
+          >
+            Tools & Software
+          </Typography>
+
+          <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#61DAFB' : '#333333', // React color in dark mode, default in light mode
+                  }}
+                >
+                  React
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#61DAFB' : '#333333', // Next.js color in dark mode, default in light mode
+                  }}
+                >
+                  Next.js
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#339933' : '#333333', // Node.js color in dark mode, default in light mode
+                  }}
+                >
+                  Node.js
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#47A248' : '#333333', // MongoDB color in dark mode, default in light mode
+                  }}
+                >
+                  PostgreSQL
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#FFCA28' : '#333333', // Firebase color in dark mode, default in light mode
+                  }}
+                >
+                  Firebase
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#F05032' : '#333333', // Git color in dark mode, default in light mode
+                  }}
+                >
+                  Git
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Box textAlign="center">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: 'monospace',
+                    color: darkMode ? '#007FFF' : '#333333', // Material-UI color in dark mode, default in light mode
+                  }}
+                >
+                  Material-UI
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+
         <Box
           sx={{
             py: 2,
@@ -361,324 +640,39 @@ export default function Home() {
             mt: 'auto',
           }}
         >
-
-
-
-          {/* Project Panel */}
-          <Container maxWidth="md" sx={{ mt: 7 }}>
-            <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
-              my projects
-            </Typography>
-            {isSwiperReady && (
-              <>
-                <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-                  <CardMedia> {/* Set a fixed height for CardMedia */}
-                    <Swiper
-                      modules={[Navigation, Pagination, Autoplay]}
-                      autoplay={{ delay: 1500 }}
-                      loop
-                      speed={3000} // Increase the transition duration for smoother sliding
-                      style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
-                    >
-                      <SwiperSlide>
-                        <Image
-                          src="/images/projec4.png"
-                          alt="Slide 1"
-                          layout="responsive"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                          objectFit="cover" // Ensure the image covers the slide area
-                        />
-                      </SwiperSlide>
-                      <SwiperSlide>
-                        <Image
-                          src="/images/team.png"
-                          alt="Slide 2"
-                          layout="responsive"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                        />
-                      </SwiperSlide>
-                      <SwiperSlide>
-                        <Image
-                          src="/images/instaa.png"
-                          layout="responsive"
-                          alt="Slide 3"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                        />
-                      </SwiperSlide>
-                    </Swiper>
-                  </CardMedia>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
-                      Futures of Kashmir
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                      Futures of Kashmir is a dynamic and secure website developed for a Georgetown-founded non-profit organization dedicated to enhancing educational opportunities and promoting literacy among children in the Kashmir region. The website serves as a comprehensive platform to showcase the organization&apos; s; initiatives, facilitate donations, and engage with supporters and the community.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="secondary" href="https://futuresofkashmir.org/" target="_blank">
-                      Visit Site
-                    </Button>
-                    <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/kashmir" target="_blank">
-                      View Code
-                    </Button>
-                  </CardActions>
-                </Card>
-                <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-                  <CardMedia> {/* Set a fixed height for CardMedia */}
-                    <Swiper
-                      modules={[Navigation, Pagination, Autoplay]}
-                      autoplay={{ delay: 3500 }}
-                      loop
-                      speed={3000} // Increase the transition duration for smoother sliding
-                      style={{ width: "100%", height: "100%" }} // Ensure Swiper takes full height of CardMedia
-                    >
-                      <SwiperSlide>
-                        <Image
-                          src="/images/project2.png"
-                          alt="recoveryhome"
-                          layout="responsive"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                        />
-                      </SwiperSlide>
-                      <SwiperSlide>
-                        <Image
-                          src="/images/serviceinfo.png"
-                          alt="serviceinfo"
-                          layout="responsive"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                        />
-                      </SwiperSlide>
-                      <SwiperSlide>
-                        <Image
-                          src="/images/rates.png"
-                          alt="rates"
-                          layout="responsive"
-                          width={850}
-                          height={430}
-                          style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                        />
-                      </SwiperSlide>
-                    </Swiper>
-                  </CardMedia>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
-                      Recovery AI
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                      Recovery AI is a web application developed for anyone who needs damaged an blurred images to be refined.
-                      The platform offers key services to streamline this process into service packages, helping users make informed decisions about their image refinement.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="secondary" href="https://recoveryai.pro" target="_blank">
-                      Visit Site
-                    </Button>
-                    <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/enhanced_img_AI" target="_blank">
-                      View Code
-                    </Button>
-                  </CardActions>
-                </Card>
-                <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
-                  <CardMedia>
-
-                    <Image
-                      layout="responsive"
-                      width={850}
-                      height={430}
-                      src="/images/csadvisor.png" // Replace with the actual image URL
-                      alt="CSAdvisor Project"
-                      style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                    />
-
-                  </CardMedia>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: 'monospace' }}>
-                      CSAdvisor
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                      CSAdvisor is a web application developed for Cornell University students to assist in course planning and advising.
-                      The platform offers detailed insights into courses, professors, and student feedback, helping students make informed decisions about their academic paths.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="secondary" href="https://cs.cornelladvisor.com" target="_blank">
-                      Visit Site
-                    </Button>
-                    <Button size="small" color="secondary" href="https://github.com/AbdulganiMuhammedsanii/Customer_support" target="_blank">
-                      View Code
-                    </Button>
-                  </CardActions>
-                </Card>
-              </>
-            )}
+          <Container maxWidth="md">
+            <Stack direction="row" justifyContent="center" spacing={4}>
+              <IconButton
+                component="a"
+                href="https://github.com/AbdulganiMuhammedsanii"
+                target="_blank"
+                color="inherit"
+                aria-label="GitHub"
+              >
+                <GitHubIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href="https://www.linkedin.com/in/abdulgani-muhammedsani-007262203/"
+                target="_blank"
+                color="inherit"
+                aria-label="LinkedIn"
+              >
+                <LinkedInIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href="mailto:abdulgani.muhammedsani@gmail.com"
+                color="inherit"
+                aria-label="Email"
+              >
+                <EmailIcon />
+              </IconButton>
+            </Stack>
           </Container>
-          <Container
-            maxWidth="md"
-            sx={{
-              mt: 5,
-              mb: 2,
-              py: 8,
-              px: 4,
-              bgcolor: darkMode ? 'background.paper' : 'background.default', // Background color based on theme
-              borderRadius: 2, // Rounded corners
-              boxShadow: 3, // Subtle shadow for depth
-            }}
-          >
-            <Typography
-              variant="h4"
-              gutterBottom
-              style={{ fontFamily: 'monospace', textAlign: 'center', color: darkMode ? '#ffffff' : '#333333' }}
-            >
-              Tools & Software
-            </Typography>
-
-            <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#61DAFB' : '#333333', // React color in dark mode, default in light mode
-                    }}
-                  >
-                    React
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#61DAFB' : '#333333', // Next.js color in dark mode, default in light mode
-                    }}
-                  >
-                    Next.js
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#339933' : '#333333', // Node.js color in dark mode, default in light mode
-                    }}
-                  >
-                    Node.js
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#47A248' : '#333333', // MongoDB color in dark mode, default in light mode
-                    }}
-                  >
-                    PostgreSQL
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#FFCA28' : '#333333', // Firebase color in dark mode, default in light mode
-                    }}
-                  >
-                    Firebase
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#F05032' : '#333333', // Git color in dark mode, default in light mode
-                    }}
-                  >
-                    Git
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: darkMode ? '#007FFF' : '#333333', // Material-UI color in dark mode, default in light mode
-                    }}
-                  >
-                    Material-UI
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
-
-          <Box
-            sx={{
-              py: 2,
-              backgroundColor: 'primary.main',
-              color: 'white',
-              mt: 'auto',
-            }}
-          >
-            <Container maxWidth="md">
-              <Stack direction="row" justifyContent="center" spacing={4}>
-                <IconButton
-                  component="a"
-                  href="https://github.com/AbdulganiMuhammedsanii"
-                  target="_blank"
-                  color="inherit"
-                  aria-label="GitHub"
-                >
-                  <GitHubIcon />
-                </IconButton>
-                <IconButton
-                  component="a"
-                  href="https://www.linkedin.com/in/abdulgani-muhammedsani-007262203/"
-                  target="_blank"
-                  color="inherit"
-                  aria-label="LinkedIn"
-                >
-                  <LinkedInIcon />
-                </IconButton>
-                <IconButton
-                  component="a"
-                  href="mailto:abdulgani.muhammedsani@gmail.com"
-                  color="inherit"
-                  aria-label="Email"
-                >
-                  <EmailIcon />
-                </IconButton>
-              </Stack>
-            </Container>
-          </Box>
-
         </Box>
+
+
       </Box>
     </ThemeProvider>
   );
