@@ -1,11 +1,12 @@
 "use client";
 import * as React from 'react';
 import Image from "next/image";
-import { Container, Grid, CardContent, IconButton, Card, CardMedia, CardActions, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline } from '@mui/material';
+import { Container, Grid, CardContent, IconButton, Card, CardMedia, CardActions, AppBar, Toolbar, Typography, Stack, Button, Box, CssBaseline, Divider, Fab } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
@@ -16,9 +17,10 @@ import 'swiper/css/pagination';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { experiences as experiencesData, semesters as semestersData } from "../data/siteContent";
 
 export default function Home() {
-  const fulltext = "hhi, my name is abdulgani,\n and i am a cs and stat major \n at cornell university,\n with an interest in software \ndevelopment and machine learning.";
+  const fulltext = "Hii, I'm Abdulgani,\n Software Engineer, \n emerging ML enthusiast,\n and passionate builder \n at Cornell University.";
   const [text, setText] = React.useState("");
   const [isTextGenerating, setIsTextGenerating] = React.useState(true); // Track if text is generating
   const [isSwiperReady, setIsSwiperReady] = React.useState(false); // Track if swiper is ready
@@ -27,93 +29,10 @@ export default function Home() {
   const shortName = 'Abdul';
   const [displayedName, setDisplayedName] = React.useState(fullName);
   const [isHovered, setIsHovered] = React.useState(false);
-  const experiences = [
-    {
-      image: "/images/aws3.jpg",
-      role: "Incoming SDE Intern @ Amazon Web Services",
-      description: ""
-    },
-
-    {
-      image: "/images/logo.png",
-      role: "Contracted Developer @ Futures of Kashmir",
-      description: "Built a secure donation platform using Next.js and StripeAPI, receiving $11,000 in donations and $7,250 funding from the Social Innovation and Public Service Fund (SIPS).\n Integrated Stripe API for real-time payment processing and seamless bank account linkage.\n Designed a donor-friendly interface with Material-UI to enhance user engagement and simplify transactions."
-    },
-    {
-      image: "/images/headstarter.png",
-      role: "SWE Fellow at Headstarter AI",
-      description: "Built 5+ AI apps and APIs using NextJS, OpenAI, Pinecone, StripeAPI \n  from design to deployment leading 3 engineering fellows using MVC design patterns. \n Coached by Amazon, Bloomberg, and Capital One engineers on Agile, CI/CD, Git and microservice patterns",
-    },
-    {
-      image: "/images/cornell_webdev.webp",
-      role: "Cornell Webdev Project Team Member",
-      description: "Contributed to Scheduler plus, a chrome extension that serves to provide additional information for students looking to create their schedule. Utilized React, JavaScript, and HTML/CSS to develop the front-end of the extension. Collaborated with a team of 3 developers to implement features and deployment.",
-    },
-    {
-      image: "/images/cornell_logo.png",
-      role: "CS1110 Course Assistant",
-      description: "Assisted in lab sections by guiding 30+ students through technical coding problems. Contributed to bi-weekly grading sessions of 400+ coding assignments, and provided comprehensive feedback.",
-    },
-    {
-      image: "/images/google_cssi.jpg",
-      role: "Google CSSI Program Participant",
-      description: "Participated in a 4-week intensive computer science summer program for high-achieving students. Configured 14 individual coding projects in JavaScript by using concepts such as variables, data types, and functions. Delivered a collaborative final project presentation that included a live demonstration to Google employees and community leaders.",
-    }
-    // Add more experiences here
-  ];
-  const semesters = [
-    {
-      semester: "SP25",
-      courses: [
-        "CS4740 Natural Language Processing",
-        "STSCI 4520 Statistical Computing",
-        "ECON3140 Econometrics",
-        "STSCI3020 Biological Statistics II"
-      ],
-    },
-    {
-      semester: "FA24",
-      courses: [
-        "CS4820 Analysis of Algorithms",
-        "STSCI3740 Machine Learning",
-      ],
-    },
-    {
-      semester: "SU24",
-      courses: [
-        "STSCI3080 Probability Models and Inference",
-      ],
-    },
-    {
-      semester: "SP24",
-      courses: [
-        "CS4700 Foundations of Artificial Intelligence",
-        "CS3110 Data Structures and Functional Programming",
-      ],
-    },
-    {
-      semester: "FA23",
-      courses: [
-        "CS4410 Operating Systems",
-        "CS2800 Discrete Structures",
-      ],
-    },
-    {
-      semester: "SP23",
-      courses: [
-        "CS3420 Embedded Systems",
-        "CS1998 Intro to Backend Development",
-        "MATH2210 Linear Algebra",
-      ],
-    },
-    {
-      semester: "FA22",
-      courses: [
-        "CS1110 Intro to Computing",
-        "CS2110 Data Structures and Algorithms",
-      ],
-    },
-  ];
+  const [activeSection, setActiveSection] = React.useState("about");
+  const [showBackToTop, setShowBackToTop] = React.useState(false);
+  const experiences = experiencesData;
+  const semesters = semestersData;
 
   const textIntervalRef = React.useRef(null);
   const textGeneratedRef = React.useRef(false);
@@ -150,7 +69,8 @@ export default function Home() {
   }, [isHovered, displayedName]);
 
   React.useEffect(() => {
-    if (textGeneratedRef.current) return;
+    if (textGeneratedRef.current)
+      return () => clearInterval(textIntervalRef.current);
 
     let i = 0;
     textIntervalRef.current = setInterval(() => {
@@ -167,6 +87,56 @@ export default function Home() {
 
     return () => clearInterval(textIntervalRef.current);
   }, []);
+
+  // Scrollspy + Back-to-top visibility
+  React.useEffect(() => {
+    const sectionIds = ["about", "experience", "education", "projects"];
+    const elements = sectionIds
+      .map((id) => typeof document !== 'undefined' ? document.getElementById(id) : null)
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Determine which section is most visible
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -50% 0px",
+        threshold: [0.1, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    const onScroll = () => {
+      if (typeof window !== 'undefined') {
+        setShowBackToTop(window.scrollY > 400);
+      }
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const darkTheme = createTheme({
     palette: {
@@ -219,7 +189,7 @@ export default function Home() {
             bgcolor: "background.default",
             color: "text.primary",
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: { xs: 'column', md: 'row-reverse' },
             minHeight: "100vh",
           }}
         >
@@ -227,7 +197,7 @@ export default function Home() {
             <Toolbar>
               <Typography
                 color={"text.primary"}
-                style={{ fontFamily: 'monospace', cursor: 'pointer' }}
+                style={{ fontFamily: 'var(--font-display)', cursor: 'pointer', letterSpacing: 0.5 }}
                 variant="h6"
                 component="div"
                 sx={{ flexGrow: 1 }}
@@ -236,6 +206,20 @@ export default function Home() {
               >
                 {displayedName}
               </Typography>
+              <Stack direction='row' spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <Button color={activeSection === 'about' ? 'secondary' : 'inherit'} href="#about" sx={{ fontFamily: 'monospace' }}>
+                  About
+                </Button>
+                <Button color={activeSection === 'experience' ? 'secondary' : 'inherit'} href="#experience" sx={{ fontFamily: 'monospace' }}>
+                  Experience
+                </Button>
+                <Button color={activeSection === 'education' ? 'secondary' : 'inherit'} href="#education" sx={{ fontFamily: 'monospace' }}>
+                  Education
+                </Button>
+                <Button color={activeSection === 'projects' ? 'secondary' : 'inherit'} href="#projects" sx={{ fontFamily: 'monospace' }}>
+                  Projects
+                </Button>
+              </Stack>
               <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <IconButton color="inherit" onClick={toggleDarkMode} disabled={isTextGenerating}>
                   {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -255,7 +239,7 @@ export default function Home() {
 
 
 
-          <Box sx={{
+          <Box id="about" sx={{
             flexGrow: 1,
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
@@ -265,48 +249,55 @@ export default function Home() {
             ml: { xs: 2, md: 20 },
             mr: { xs: 2, md: 2 },
             maxWidth: '100%',
+            scrollMarginTop: 80,
+            borderRadius: 2,
           }}>
             <Box sx={{
-              width: { xs: 280, md: 405 },
-              height: { xs: 250, md: 385 },
+              width: { xs: 320, md: 500 },
+              height: { xs: 320, md: 500 },
               display: 'flex',
+              ml: { xs: 0, md: 20 },
+              mt: { xs: 5, md: -10 },
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <Card sx={{ width: '100%', height: '100%', borderRadius: '30%', boxShadow: 3, overflow: 'hidden' }}>
+              <Card sx={{ width: '100%', height: '100%', borderRadius: '50%', boxShadow: 3, overflow: 'hidden', transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                 <CardMedia
                   component="img"
-                  image="/images/abdulganiheadshot.JPG"
+                  image="/images/AbdulganiHeadshot.png"
                   alt="Abdulgani's Picture"
                   sx={{
-                    width: '110%', // Increase width to move the image to the right
+                    width: '100%',
                     height: '100%',
-                    borderRadius: '30%',
-                    filter: 'brightness(90%)',
-                    transform: 'translateX(-1%)', // Shift the image to the right
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    objectPosition: '50% 25%',
+                    filter: 'none',
+                    transition: 'transform 0.3s ease-in-out',
                     '&:hover': {
-                      transform: 'translateX(-1%) scale(1.05)', // Maintain the right shift on hover
-                      transition: 'transform 0.3s ease-in-out',
+                      transform: 'scale(1.02)'
                     }
                   }}
                 />
               </Card>
             </Box>
-            <Box sx={{ ml: { xs: 0, md: 10 }, mt: { xs: 6, md: 0 }, flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}>
-              <Typography fontSize={{ xs: 20, md: 30 }} style={{ fontFamily: 'monospace', whiteSpace: 'pre-line' }} variant="h5" component="p" gutterBottom>
+            <Box sx={{ ml: { xs: 0, md: 25 }, mt: { xs: 8, md: -10 }, flexGrow: 1, textAlign: { xs: 'center', md: 'left' } }}>
+              <Typography fontSize={{ xs: 24, md: 36 }} style={{ fontFamily: 'var(--font-display)', whiteSpace: 'pre-line', lineHeight: 1.4 }} variant="h4" component="p" gutterBottom>
                 {text}
               </Typography>
             </Box>
           </Box>
         </Box>
-        <Container sx={{ mt: 0, mb: -3 }}>
-          <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
-            my experiences
-          </Typography>
+        <Container id="experience" sx={{ mt: 0, mb: -3, scrollMarginTop: 80 }}>
+          <Divider sx={{ mb: 3 }}>
+            <Typography variant="h5" sx={{ fontFamily: 'monospace', textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 }}>
+              Experience
+            </Typography>
+          </Divider>
           <Grid container spacing={4} direction="column">
             {experiences.map((experience, index) => (
               <Grid item key={index}>
-                <Card sx={{ display: 'flex', alignItems: 'center', padding: 2 }}>
+                <Card sx={{ display: 'flex', alignItems: 'center', padding: 2, transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                   <CardMedia
                     component="img"
                     image={experience.image}
@@ -327,14 +318,12 @@ export default function Home() {
           </Grid>
         </Container>
 
-        <Container sx={{ mt: 15, mb: 5 }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            style={{ fontFamily: "monospace", textAlign: "center" }}
-          >
-            my cs and stat education
-          </Typography>
+        <Container id="education" sx={{ mt: 15, mb: 5, scrollMarginTop: 80 }}>
+          <Divider sx={{ mb: 3 }}>
+            <Typography variant="h5" sx={{ fontFamily: 'monospace', textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 }}>
+              Education
+            </Typography>
+          </Divider>
           <Grid container spacing={4}>
             {semesters.map((semester, index) => (
               <Grid item xs={12} key={index}>
@@ -359,13 +348,15 @@ export default function Home() {
 
 
         {/* Project Panel */}
-        <Container maxWidth="md" sx={{ mt: 7 }}>
-          <Typography variant="h4" gutterBottom style={{ fontFamily: 'monospace', textAlign: 'center' }}>
-            my projects
-          </Typography>
+        <Container id="projects" maxWidth="md" sx={{ mt: 7, scrollMarginTop: 80 }}>
+          <Divider sx={{ mb: 3 }}>
+            <Typography variant="h5" sx={{ fontFamily: 'monospace', textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 }}>
+              Projects
+            </Typography>
+          </Divider>
           {isSwiperReady && (
             <>
-              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4, transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                 <CardMedia> {/* Set a fixed height for CardMedia */}
                   <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
@@ -424,7 +415,7 @@ export default function Home() {
                   </Button>
                 </CardActions>
               </Card>
-              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4, transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                 <CardMedia> {/* Set a fixed height for CardMedia */}
                   <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
@@ -483,7 +474,7 @@ export default function Home() {
                   </Button>
                 </CardActions>
               </Card>
-              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4 }}>
+              <Card sx={{ backgroundColor: "background.paper", boxShadow: 3, mb: 4, transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                 <CardMedia>
 
                   <Image
@@ -530,7 +521,7 @@ export default function Home() {
           }}
         >
           <Typography
-            variant="h4"
+            variant="h5"
             gutterBottom
             style={{ fontFamily: 'monospace', textAlign: 'center', color: darkMode ? '#ffffff' : '#333333' }}
           >
@@ -671,6 +662,12 @@ export default function Home() {
             </Stack>
           </Container>
         </Box>
+
+        {showBackToTop && (
+          <Fab color="secondary" aria-label="back to top" onClick={scrollToTop} sx={{ position: 'fixed', right: 24, bottom: 24 }}>
+            <KeyboardArrowUpIcon />
+          </Fab>
+        )}
 
 
       </Box>
